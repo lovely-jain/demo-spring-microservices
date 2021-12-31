@@ -1,13 +1,13 @@
-package com.ms.problem;
+package com.ms.zuul;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MsProblemApplication {
+public class MsZuulApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MsProblemApplication.class, args);
+		SpringApplication.run(MsZuulApplication.class, args);
 	}
 
 }
