@@ -22,8 +22,9 @@ public class CoderController {
 	
 	private String uri ="http://PROBLEMMS/";
 	
-	@GetMapping("/")
+	@GetMapping("/coder/{user}")
 	public ResponseEntity<String> getHelloMessage(@RequestParam String user ) {
+		System.out.println(user);
 		return ResponseEntity.ok("Hello "+user);
 	}
 	
