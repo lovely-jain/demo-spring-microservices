@@ -27,8 +27,9 @@ public class CoderController {
 		return ResponseEntity.ok("Hello "+user);
 	}
 	
-	@GetMapping("/{user}/problems")
+	@GetMapping("/coder/{user}/problems")
 	public ResponseEntity<List<String>> getUserRelatedProblems(@PathVariable String user ) {
+		System.out.println("here ");
 		List<String> problems = restTemplate.getForObject(uri+user, List.class);
 		return ResponseEntity.ok(problems);
 	}
