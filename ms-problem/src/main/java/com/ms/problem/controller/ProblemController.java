@@ -15,7 +15,8 @@ public class ProblemController {
 	
 	@GetMapping("/problem/{user}")
 	public List<String> allProblemsOfUser(@PathVariable("user") String userId) {
-		System.out.println("user spec.");
+		System.out.println("user specification: "+userId);
+		problems.clear();
 		if("lovely".equals(userId)) {
 			problems.add("0-1 Knapsack");
 			problems.add("DFS");
