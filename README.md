@@ -14,3 +14,14 @@
       So we don't need to know its port no., we will directly get the available one from eureka registry.  
   iv. Also, it we use ribbon with eureka, then it will do the load balancing automatically (based on the configurations). Like first time it will call Problem service on port 6002, then second time on 6003, then third time again on 6002 and so on in alternate order. And this all with just one line URL!! 
       
+
+**Zuul**
+
+1. Zuul acts like a gateway. The client will be sending requesting to it, and based on the URL it will find out where to route that request.
+2. We create a Zuul application and register it with eureka.
+3. In application.properties (configuration file), we add information regarding the request routing
+
+_zuul.routes.user.path=/user/problems/*\
+zuul.routes.user.service-id=UserMS_
+
+https://www.tutorialspoint.com/spring_boot/spring_boot_zuul_proxy_server_and_routing.htm
