@@ -28,6 +28,11 @@ https://www.tutorialspoint.com/spring_boot/spring_boot_zuul_proxy_server_and_rou
 
 
 **Hystrix**
+
+1. Whenever we send a request to some service and we didn't get success due to any reason (may be the service is not up, or some failure, or some connection issues, etc.), we need something to handle this situation. When such failure occurs, we need to stop sending requests to this service for some time so that we do not overload it with continously failining requests and it recover from failure.
+2. Circuit breaking pattern is used for that. The library will tolerate failures up to a threshold. Beyond that, it leaves the circuit open. Which means, it will forward all subsequent calls to the fallback method, to prevent future failures.
+3. Whenever the circuit is open, the response from the fallabck method is provided. Fallback executes when a. an error occurs, b. timeout occurs or c. circuit opens
+
 \
 _hystrix.command.default.metrics.rollingStats.timeInMilliseconds=10000\
 hystrix.command.default.circuitBreaker.requestVolumeThreshold=10\
@@ -35,3 +40,6 @@ hystrix.command.default.circuitBreaker.errorThresholdPercentage=50\
 hystrix.command.default.circuitBreaker.sleepWindowInMilliseconds=10000_ 
 
 Within a time frame of 10000ms (timeInMilliseconds) if we get 10 (requestVolumeThreshold) requests, out of which more that 50% (errorThresholdPercentage) requests re failed then the circuit will be open for 10000ms (sleepWindowInMilliseconds) i.e, for neext 10000ms request will be not be sent to the actual method/handler and it will be providing fallback response only. After 10000ms, a request will be sent to actual method, if it works fine then the circuit will be close again and the normal excution will start again.  Otheriws if this request fails, then again circuit will be opened for next 10000ms.
+
+https://cloud.spring.io/spring-cloud-netflix/multi/multi__circuit_breaker_hystrix_clients.html
+https://www.tutorialspoint.com/spring_cloud/spring_cloud_circuit_breaker_using_hystrix.htm
