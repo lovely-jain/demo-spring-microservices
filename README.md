@@ -25,3 +25,13 @@ _zuul.routes.user.path=/user/problems/*\
 zuul.routes.user.service-id=UserMS_
 
 https://www.tutorialspoint.com/spring_boot/spring_boot_zuul_proxy_server_and_routing.htm
+
+
+**Hystrix**
+\
+_hystrix.command.default.metrics.rollingStats.timeInMilliseconds=10000\
+hystrix.command.default.circuitBreaker.requestVolumeThreshold=10\
+hystrix.command.default.circuitBreaker.errorThresholdPercentage=50\
+hystrix.command.default.circuitBreaker.sleepWindowInMilliseconds=10000_ 
+
+Within a time frame of 10000ms (timeInMilliseconds) if we get 10 (requestVolumeThreshold) requests, out of which more that 50% (errorThresholdPercentage) requests re failed then the circuit will be open for 10000ms (sleepWindowInMilliseconds) i.e, for neext 10000ms request will be not be sent to the actual method/handler and it will be providing fallback response only. After 10000ms, a request will be sent to actual method, if it works fine then the circuit will be close again and the normal excution will start again.  Otheriws if this request fails, then again circuit will be opened for next 10000ms.
